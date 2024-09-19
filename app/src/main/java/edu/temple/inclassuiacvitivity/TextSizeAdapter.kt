@@ -1,25 +1,50 @@
 package edu.temple.inclassuiacvitivity
 
+import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
 
-class TextSizeAdapter : BaseAdapter() {
+@Suppress("UNREACHABLE_CODE")
+class TextSizeAdapter (private val context: Context, private val number: Array <Int> ) : BaseAdapter() {
+
 
     override fun getCount(): Int {
-        TODO("Not yet implemented")
+        return number.size
+
     }
 
     override fun getItem(position: Int): Any {
-        TODO("Not yet implemented")
+        return number[position]
     }
 
     override fun getItemId(position: Int): Long {
-        TODO("Not yet implemented")
+        return position.toLong()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        TODO("Not yet implemented")
-    }
+       val textView : TextView
+
+       if (convertView != null) {
+           textView = convertView as TextView
+
+       } else {
+           textView = TextView(context)
+
+       }
+
+        textView.text = number[position].toString()
+        textView.textSize = 22f
+
+        return textView
+        }
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            return super.getDropDownView(position, convertView, parent).apply {
+
+                (this as TextView).textSize = number[position].toFloat()
+            }
+        }
 
 }
